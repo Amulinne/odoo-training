@@ -1,2 +1,2 @@
-# ooo-training
+# odoo-training
 Пробы пера в Odoo
