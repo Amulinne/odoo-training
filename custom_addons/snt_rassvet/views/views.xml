@@ -1,0 +1,78 @@
+<odoo>
+
+    <record model="ir.ui.view" id="snt_rassvet.meeting_list">
+        <field name="name">snt_rassvet.meeting.list</field>
+        <field name="model">snt.meeting</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="date"/>
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="snt_rassvet.meeting_form">
+        <field name="name">snt_rassvet.meeting.form</field>
+        <field name="model">snt.meeting</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="Собрание">
+
+                    <h1>
+                        <field name="name" nolabel="1"/>
+                    </h1>
+
+                    <h2>
+                        <field name="date" nolabel="1"/>
+                    </h2>
+
+                    <group>
+                        <field name="protocol_id"/>
+                    </group>
+
+                    <notebook>
+                        <page name="questions" string="Вопросы">
+                            <field name="question_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="yes"/>
+                                    <field name="state"/>
+                                    <field name="meeting_id"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page name="members" string="Участники">
+                            <field name="member_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <data>
+
+        <record model="ir.actions.act_window"
+                id="snt_rassvet.action_window">
+            <field name="name">Собрания</field>
+            <field name="res_model">snt.meeting</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem name="СНТ"
+                  id="snt_rassvet.menu_root"/>
+
+        <menuitem name="Собрания"
+                  id="snt_rassvet.menu_1"
+                  parent="snt_rassvet.menu_root"
+                  action="snt_rassvet.action_window"/>
+
+    </data>
+
+</odoo>

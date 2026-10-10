@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="driving_school.lesson_list">
+        <field name="name">driving.lesson.list</field>
+        <field name="model">driving.lesson</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="date"/>
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="driving_school.lesson_form">
+        <field name="name">driving.lesson.form</field>
+        <field name="model">driving.lesson</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="Занятие по вождению">
+                    <h1>
+                        <field name="name"
+                               nolabel="1"
+                               placeholder="Наименование занятия"/>
+                    </h1>
+
+                    <group>
+                        <field name="date"/>
+                    </group>
+
+                    <notebook>
+                        <page name="exercises" string="Упражнения">
+                            <field name="exercise_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="score"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page name="members" string="Курсанты">
+                            <field name="member_ids"
+                                   widget="many2many_tags"
+                                   options="{'no_create': True}"/>
+                        </page>
+
+                        <page name="reports" string="Отчёт инструктора">
+                            <field name="report_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="instructor"/>
+                                    <field name="senior_instructor"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="driving_school.report_list">
+        <field name="name">driving.report.list</field>
+        <field name="model">driving.report</field>
+        <field name="arch" type="xml">
+            <list create="false">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="lesson_id"/>
+                <field name="instructor"/>
+                <field name="senior_instructor"/>
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="driving_school.report_form">
+        <field name="name">driving.report.form</field>
+        <field name="model">driving.report</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet string="Отчёт инструктора">
+                    <h1>
+                        <field name="name"
+                               nolabel="1"
+                               placeholder="Наименование отчёта"/>
+                    </h1>
+
+                    <group>
+                        <group>
+                            <field name="lesson_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="instructor"/>
+                            <field name="senior_instructor"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page name="report_text" string="Текст отчёта">
+                            <field name="text" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window"
+            id="driving_school.lesson_action">
+        <field name="name">Занятия</field>
+        <field name="res_model">driving.lesson</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record model="ir.actions.act_window"
+            id="driving_school.report_action">
+        <field name="name">Отчёты инструкторов</field>
+        <field name="res_model">driving.report</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem name="Автошкола"
+              id="driving_school.menu_root"/>
+
+    <menuitem name="Занятия"
+              id="driving_school.menu_lessons"
+              parent="driving_school.menu_root"
+              action="driving_school.lesson_action"
+              sequence="10"/>
+
+    <menuitem name="Отчёты инструкторов"
+              id="driving_school.menu_reports"
+              parent="driving_school.menu_root"
+              action="driving_school.report_action"
+              sequence="20"/>
+
+</odoo>

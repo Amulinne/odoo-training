@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_driving_lesson,driving.lesson,model_driving_lesson,base.group_user,1,1,1,1
+access_driving_report,driving.report,model_driving_report,base.group_user,1,1,1,1
+access_driving_exercise,driving.exercise,model_driving_exercise,base.group_user,1,1,1,1

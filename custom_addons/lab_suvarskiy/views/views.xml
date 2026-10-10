@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.lab_suvarskiy</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']" position="after">
+                <label for="product_id" />
+                <field name="product_id"
+                    domain="[('type','=','consu')]"
+                    invisible="probability &lt; 10"
+                    style="color: red;" />
+                <label for="stage_id_extra"
+                    invisible="probability == 100" />
+
+                <field name="stage_id_extra"
+                    domain="[('is_won', '=', False)]"
+                    invisible="probability == 100"
+                    style="color: blue;" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
